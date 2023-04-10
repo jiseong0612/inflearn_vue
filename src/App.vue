@@ -1,9 +1,17 @@
 <template>
   <tool-bar></tool-bar>
-  <transition name="fade">
+  <!-- 아래에서 위와 같이 바뀜 -->
+  <router-view v-slot="{ Component }">
+    <transition name="fade">
+      <component :is="Component" />
+    </transition>
+  </router-view>
+  <!-- <transition name="fade">
     <router-view/>
-  </transition>
+  </transition> -->
 </template>
+
+
 
 <script>
 import ToolBar from '@/components/ToolBar.vue'

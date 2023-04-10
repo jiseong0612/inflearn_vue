@@ -16,7 +16,7 @@ export default{
         .catch(error => console.log(error));
     },
     FETCH_ASK(context){
-        api.fetchNewsList()
+        api.fetchAskList()
         .then(({data}) => context.commit('SET_ASK', data))
         .catch(error => console.log(error));
     },

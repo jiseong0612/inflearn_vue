@@ -1,20 +1,29 @@
 <template>
   <div>
       <ul class="news-list">
-      <li v-for="item in this.$store.state.news" v-bind:key="item.id" class="post">
+      <li v-for="item in listItems" v-bind:key="item.id" class="post">
         <!-- 포인트 영역 -->
         <div class="points">
-          {{item.points}}
+          {{item.points || 0}}
         </div>
         <!-- 기타 정보 영역 -->
         <div>
           <p class="news-title">
-            <a :href="`${item.url}`">{{item.title}}</a> 
+            <template v-if="item.domain">
+              <a :href="`${item.url}`">{{item.title}}</a> 
+            </template>
+            <template v-else>
+              <router-link :to="`/item/${item.id}`">
+                {{item.title}}
+              </router-link>
+            </template>
           </p>
           <small class="link-text">
-            {{ item.time_ago}} 
-            by 
-            <router-link :to="`/user/${item.user}`" class="link-text">{{item.user}}</router-link>
+            {{ item.time_ago}} by 
+            <router-link v-if="item.user" :to="`/user/${item.user}`" class="link-text">{{item.user}}</router-link>
+            <a v-else :href="item.url" >
+              {{item.domain}}
+            </a> 
           </small>
         </div>
       </li>
@@ -25,7 +34,32 @@
 <script>
 export default {
  created(){
-    this.$store.dispatch('FETCH_NEWS');
+    const name = this.$route.name;
+    if(name === 'news'){
+      console.log('created : news ')
+      this.$store.dispatch('FETCH_NEWS');
+    }else if(name === 'ask'){
+      console.log('created : ask ')
+      this.$store.dispatch('FETCH_ASK');
+    }else{
+      console.log('created1 : jobs ')
+      this.$store.dispatch('FETCH_JOBS');
+    }
+  },
+  computed : {
+    listItems(){  //this.$store.state.news
+    const name = this.$route.name;
+      if(name === 'news'){
+        console.log('created : news ')
+        return this.$store.state.news;
+      }else if(name === 'ask'){
+        console.log('created : ask ')
+        return this.$store.state.ask;
+      }else{
+        console.log('created2 : jobs ')
+        return this.$store.state.jobs;
+      }
+    }
   }
 }
 </script>
