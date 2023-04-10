@@ -2,35 +2,34 @@ import { createRouter, createWebHistory } from 'vue-router'
 import NewsView from '../views/NewsView.vue'
 import AskView from '../views/AskView.vue'
 import JobsView from '../views/JobsView.vue'
-import UserView from '../views/UserView.vue'
 import ItemView from '../views/ItemView.vue'
-const routes = [
+import UserView from '../views/UserView.vue'
 
+const routes = [
   {
     path: '/',
-    redirect: '/news'
+    redirect : '/news'
   },
   {
     path: '/news',
-    component: NewsView
+    component : NewsView
   },
   {
     path: '/ask',
-    component: AskView
+    component : AskView
   },
   {
     path: '/jobs',
-    component: JobsView
+    component : JobsView
   },
   {
-    path: '/user',
-    component: UserView
+    path: '/item/:id',
+    component : ItemView
   },
   {
-    path: '/item',
-    component: ItemView
-  },
- 
+    path: '/user/:userName',
+    component : UserView
+  }
 ]
 
 const router = createRouter({
