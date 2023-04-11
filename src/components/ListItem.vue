@@ -34,26 +34,26 @@
 <script>
 export default {
  created(){
-    const name = this.$route.name;
-    if(name === 'news'){
-      console.log('created : news ')
-      this.$store.dispatch('FETCH_NEWS');
-    }else if(name === 'ask'){
-      console.log('created : ask ')
-      this.$store.dispatch('FETCH_ASK');
-    }else{
-      console.log('created1 : jobs ')
-      this.$store.dispatch('FETCH_JOBS');
-    }
+    //const name = this.$route.name;
+    // if(name === 'news'){
+    //   console.log('created1 : news ')
+    //   this.$store.dispatch('FETCH_NEWS');
+    // }else if(name === 'ask'){
+    //   console.log('created1 : ask ')
+    //   this.$store.dispatch('FETCH_ASK');
+    // }else{
+    //   console.log('created1 : jobs ')
+    //   this.$store.dispatch('FETCH_JOBS');
+    // }
   },
   computed : {
     listItems(){  //this.$store.state.news
     const name = this.$route.name;
       if(name === 'news'){
-        console.log('created : news ')
+        console.log('created2 : news ')
         return this.$store.state.news;
       }else if(name === 'ask'){
-        console.log('created : ask ')
+        console.log('created2 : ask ')
         return this.$store.state.ask;
       }else{
         console.log('created2 : jobs ')

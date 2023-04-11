@@ -1,31 +1,34 @@
 <template>
  <div>
     <section>
-      <!-- 질문 상세 정보 -->
-      <div class="user-container">
-        <div>
-          <i class="fas fa-user"></i>
-        </div>
-        <div class="user-description">
-          <router-link :to="`/user/${item.user}`">{{item.user}}</router-link>
-          <div class="time">
-              {{ item.time_ago}}
-          </div>
-        </div>
-      </div>
-        <h2>{{ item.title }}</h2>
+      <user-profile :userInfo="userInfo">
+        <template v-slot:username>
+            <router-link :to="`/user/${userInfo.user}`">{{ userInfo.user }}</router-link>
+        </template>
+        <template v-slot:time>
+            {{ 'Posted '+userInfo.time_ago }}
+        </template>
+      </user-profile>
+    </section>
+    <section>
+        <h2>{{ userInfo.title }}</h2>
     </section>
     <section>
       <!-- 질문 댓글 -->
-      <div v-html="item.content"></div>
+      <div v-html="userInfo.content"></div>
     </section>
   </div>
 </template>
 
 <script>
+import UserProfile from "@/components/UserProfile.vue";
+
 export default {
+  components: { 
+    UserProfile 
+  },
   computed : {
-    item(){
+    userInfo(){
       return this.$store.state.item;
     }
   },

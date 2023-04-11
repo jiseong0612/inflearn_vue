@@ -9,15 +9,35 @@
   <!-- <transition name="fade">
     <router-view/>
   </transition> -->
+  <Spinner :loading="true"></Spinner>
 </template>
 
 
 
 <script>
 import ToolBar from '@/components/ToolBar.vue'
+import Spinner from './components/spinnerComp.vue'
+// import bus from '@/utils/bus'
 export default {
   components: {
     ToolBar
+    , Spinner
+  },
+  data(){
+    return {
+      loadingStatus : false,
+    };
+  },
+  methods: {
+    startSpinner(){
+      this.loadingStatus = true;
+    },
+    endSpinner(){
+      this.loadingStatus = false;
+    }
+  },
+  created(){
+    //bus.$on('start:spinner', this.startSpinner);
   }
 }
 </script>
